@@ -1,5 +1,4 @@
 // traer los elementos 
-
 const imG = document.querySelector("figure"); 
 const sInput = document.querySelector('#search-input');
 
@@ -39,24 +38,23 @@ try{
 if(sInput.value){
             let id = sInput.value.toLowerCase();
         const response = await fetch(`https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/${id}`);
-          const data = await response.json();
-          console.log(data);
+        const data = await response.json();
+        console.log(data);
           // 
-        // image1 = data.sprites.back_default;
+        image1 = data.sprites.back_default;
         image2 = data.sprites.front_default;
-        // pokemonImg.src=image2
-        // imG.innerHTML=` <img src="${image2}" alt="WAIT" id="sprite" class="picture img" >`
+        pokemonImg.src=image2;
+    // 
+        image4 = data.sprites.back_shiny;
+        image3 = data.sprites.front_shiny;
     // // 
-    //     image4 = data.sprites.back_shiny;
-    //     image3 = data.sprites.front_shiny;
+        image5 = data.sprites.back_female
+        image6 = data.sprites.front_female
     // // 
-    //     image5 = data.sprites.back_female
-    //     image6 = data.sprites.front_female
-    // // 
-    //     image7 = data.sprites.back_shiny_female
-    //     image8 = data.sprites.front_shiny_female
+        image7 = data.sprites.back_shiny_female
+        image8 = data.sprites.front_shiny_female
     // // ;
-    images.push(image2);
+    images.push(image1);
     if(image1){
         images.push(image1);
         if(image2){
@@ -87,7 +85,6 @@ if(sInput.value){
     
     let uno = 1;    
     
-    imG.innerHTML=` <img  id="sprite" src="${image2}" alt="${data.name} front default sprite"  class="picture img"  > `;
     // aplicar las proiedades
     if(uno ===1){
         pokemonName.textContent = `${data.name.toUpperCase()}`;
@@ -104,9 +101,11 @@ if(sInput.value){
         console.log()
         pokemonDefense.textContent=data.stats[2].base_stat
         pokemonSDefense.textContent=data.stats[4].base_stat
+
+        pokemonImg.style.opacity='100%'
         if(images.length != 0){
+            console.log(images)
             iniciar = setInterval(changeImage, 4000); 
-            console.log(images);
         }
         uno=2;
     }else{
@@ -117,14 +116,22 @@ if(sInput.value){
 console.log('Oopsss');
 }
 }catch(err){
+    pokemonImg.style.opacity='10%'
     resetAll();
     alert('Pokémon not found');
     console.log(`Pokémon not found: ${err}`);
 }
 }
+if(pokemonImg.src===""){
+    pokemonImg.style.opacity='10%'
+}else{
+    pokemonImg.style.opacity='100%'
+}
 
 function resetAll(){
-    imG.innerHTML=``;
+
+    pokemonImg.src='';
+    pokemonImg.classList.remove('imo');
     images= [];
     sInput.textContent="";
     pokemonName.innerHTML=``;
@@ -142,24 +149,8 @@ function resetAll(){
 }
 
 function changeImage() {
-    const pokemonImg = document.querySelector("#sprite");
     pokemonImg.src = images[currentImageIndex]; // Cambia la imagen
     currentImageIndex = (currentImageIndex + 1) % images.length; // Avanza al siguiente índice
 }
 
 sButton.addEventListener('click', obtenerPoks);
-/*    PokemonName.innerHTML=`Name: <p>${data.name.toUpperCase()}</p>`;
-    PokemonId.innerHTML=`Id: <p>#${data.id}</p>`;
-    PokemonHeight.innerHTML=`Height: <p>${data.height}</p>`;
-    if(data.types.length>1){
-        PokemonType.innerHTML=`Type: <p>${data.types[0].type.name.toUpperCase()} & ${data.types[1].type.name.toUpperCase()}</p>`;
-    }else {
-        PokemonType.innerHTML=`Type <p>${data.types[0].type.name.toUpperCase()}`;
-    }
-    PokemonHp.innerHTML=`Hp: <p>${data.stats[0].base_stat}</p>`;
-    PokemonWeight.innerHTML=`Weigth: <p>${data.weight}</p>`
-    PokemonSpeed.innerHTML=`Speed: <p>${data.stats[5].base_stat}</p>`
-    PokemonAttack.innerHTML=`Attack: <p>${data.stats[1].base_stat}</p>`
-    PokemonSAttack.innerHTML=`SP-Attack: <p>${data.stats[4].base_stat}</p>`
-    PokemonDefense.innerHTML=`Defense: <p>${data.stats[2].base_stat}</p>`
-    PokemonSDefense.innerHTML=`SP-Defense: <p>${data.stats[3].base_stat}</p>` */
