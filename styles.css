@@ -61,7 +61,10 @@ figure{
     transform: scale(4);
     object-fit: cover;
     z-index: 3;
+    opacity: 100%;
+    font-size: 10px;
 }
+
 #types{
     width: 100%;
     height: 30px;
@@ -113,7 +116,6 @@ span{
     left: 0%;
     top: 50%;
     border: solid 3px #ffb30000;
-
     color: black;
 }
 #weight{
@@ -142,7 +144,6 @@ span{
     height: 25px;
     color: black;
     font-size: 15px;
-
 }
 #hp{
     top: 50%;
@@ -205,8 +206,6 @@ span{
     border: solid 3px #ffb300;
     background-color: #ffd500;
     color: black;
-
-
 }
 #hps{
     top: 43%;
@@ -476,13 +475,10 @@ span{
 }
 }
 
-
-
 @media screen and (max-width:470px) {
     .spanContainer{
        width: 90%;
     }
-
     span{
         width:100%;
     }
